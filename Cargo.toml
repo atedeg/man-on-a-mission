@@ -1,0 +1,31 @@
+[package]
+name = "man-on-a-mission"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+
+[dependencies]
+anyhow = "1.0.75"
+thiserror = "1.0.48"
+serde = { version = "1.0.188", features = ["derive"] }
+serde_json = "1.0.105"
+tokio = { version = "1.32.0", features = ["full"] }
+sqlx = { version = "0.7.1", features = [
+    "runtime-tokio",
+    "postgres",
+    "macros",
+    "migrate",
+] }
+tracing = "0.1.37"
+tracing-subscriber = { version = "0.3.17", features = [
+    "env-filter",
+    "json",
+    "fmt",
+] }
+dotenvy = "0.15.7"
+teloxide = { version = "0.12.2", features = ["macros", "throttle"] }

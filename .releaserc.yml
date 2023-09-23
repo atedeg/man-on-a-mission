@@ -1,0 +1,20 @@
+tagFormat: ${version}
+branches:
+  - main
+
+plugins:
+  - - "@semantic-release/commit-analyzer"
+    - preset: conventionalcommits
+  - - "@semantic-release/release-notes-generator"
+    - preset: conventionalcommits
+  - "@semantic-release/changelog"
+  - - "@semantic-release/exec"
+    - prepareCmd: sed -i 's/^version\s*=\s*.*$/version = "${nextRelease.version}"/g' Cargo.toml
+  - - "@semantic-release/git"
+    - assets:
+        - CHANGELOG.md
+        - Cargo.toml
+  - - "@semantic-release/github"
+    - assets:
+        - path: target/release/man-on-a-mission
+          label: Telegram Bot

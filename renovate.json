@@ -1,0 +1,75 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:base",
+        ":rebaseStalePrs",
+        ":semanticCommits",
+        ":semanticCommitTypeAll(build)"
+    ],
+    "automerge": true,
+    "dependencyDashboard": true,
+    "labels": [
+        "dependencies"
+    ],
+    "minimumReleaseAge": "3 days",
+    "internalChecksFilter": "strict",
+    "regexManagers": [
+        {
+            "fileMatch": [
+                "^rust-toolchain\\.toml?$"
+            ],
+            "matchStrings": [
+                "channel\\s*=\\s*\"(?<currentValue>\\d+\\.\\d+(\\.\\d+)?)\""
+            ],
+            "depNameTemplate": "rust",
+            "lookupNameTemplate": "rust-lang/rust",
+            "datasourceTemplate": "github-releases"
+        }
+    ],
+    "packageRules": [
+        {
+            "description": "Wait three days for npm updates (npm retraction time)",
+            "matchDatasources": [
+                "npm"
+            ],
+            "internalChecksFilter": "strict",
+            "minimumReleaseAge": "3 days"
+        },
+        {
+            "description": "Updates to Cargo should happen on a schedule",
+            "matchManagers": [
+                "cargo"
+            ],
+            "schedule": [
+                "before 3am on Monday"
+            ]
+        },
+        {
+            "description": "Updates to GitHub Actions should be tagged as 'ci'",
+            "matchPaths": [
+                ".github/workflows/*.yml",
+                ".github/workflows/*.yaml"
+            ],
+            "semanticCommitType": "ci"
+        },
+        {
+            "matchManagers": [
+                "regex"
+            ],
+            "matchPackageNames": [
+                "rust"
+            ],
+            "commitMessageTopic": "rust"
+        }
+    ],
+    "vulnerabilityAlerts": {
+        "semanticCommitType": "fix",
+        "minimumReleaseAge": "1 day",
+        "internalChecksFilter": "strict",
+        "addLabels": [
+            "security"
+        ]
+    },
+    "prConcurrentLimit": 10,
+    "prHourlyLimit": 0
+}

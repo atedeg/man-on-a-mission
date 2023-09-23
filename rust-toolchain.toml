@@ -1,0 +1,5 @@
+[toolchain]
+channel = "1.72.0"
+components = ["rustc", "cargo", "rust-std", "rustfmt", "clippy"]
+targets = ["x86_64-unknown-linux-gnu"]
+profile = "minimal"

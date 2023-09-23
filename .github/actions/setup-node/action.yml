@@ -1,0 +1,16 @@
+name: Setup Node
+
+inputs: {}
+outputs: {}
+runs:
+  using: composite
+  steps:
+    - name: Cache NodeJS toolchain artifacts
+      uses: actions/cache@v3
+      with:
+        path: |
+          node_modules
+        key: ${{ runner.os }}-nodejs-${{ hashFiles('**/package.json', '**/package-lock.json') }}
+    - name: Install npm packages
+      run: npm install
+      shell: bash
