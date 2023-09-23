@@ -16,10 +16,14 @@
 #![warn(clippy::print_stderr)]
 #![warn(clippy::print_stdout)]
 
+mod commands;
+mod operations;
 use std::time::Duration;
 
+use crate::operations::schema;
 use anyhow::Context;
 use sqlx::postgres::PgPoolOptions;
+use teloxide::{prelude::Dispatcher, Bot};
 use tracing::info;
 
 #[tokio::main]
@@ -49,5 +53,10 @@ async fn main() {
         .context("Could not run migrations")
         .unwrap();
 
-    todo!()
+    let bot = Bot::from_env();
+    Dispatcher::builder(bot, schema())
+        .enable_ctrlc_handler()
+        .build()
+        .dispatch()
+        .await;
 }
