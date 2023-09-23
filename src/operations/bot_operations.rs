@@ -1,4 +1,4 @@
-use teloxide::{types::{Message}, Bot, requests::Requester};
+use teloxide::{requests::Requester, types::Message, Bot};
 
 type HandlerResult = Result<(), Box<dyn std::error::Error + Send + Sync>>;
 
