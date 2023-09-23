@@ -1,5 +1,8 @@
 use super::bot_operations::help;
-use teloxide::{dispatching::{UpdateHandler, UpdateFilterExt}, types::Update};
+use teloxide::{
+    dispatching::{UpdateFilterExt, UpdateHandler},
+    types::Update,
+};
 
 pub fn schema() -> UpdateHandler<Box<dyn std::error::Error + Send + Sync + 'static>> {
     Update::filter_message().endpoint(help)
