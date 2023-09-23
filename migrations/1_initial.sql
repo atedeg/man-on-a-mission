@@ -1,1 +1,19 @@
--- Schema goes here.
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+);
+
+CREATE TABLE IF NOT EXISTS missions (
+    id INTEGER PRIMARY KEY SERIAL,
+    name VARCHAR(255) NOT NULL,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+);
+
+CREATE TABLE IF NOT EXISTS expenses (
+    id INTEGER PRIMARY KEY SERIAL,
+    mission_id INTEGER NOT NULL REFERENCES missions(id) ON DELETE CASCADE,
+    name VARCHAR(255) NOT NULL,
+    amount INTEGER NOT NULL,
+    currency VARCHAR(255) NOT NULL,
+    attachment BYTEA,
+);
