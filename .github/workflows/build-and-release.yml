@@ -1,15 +1,7 @@
 name: Build and Release
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - '**.rs'
-      - '**.sql'
-  pull_request:
-    paths:
-      - '**.rs'
-      - '**.sql'
+  workflow_call:
   workflow_dispatch:
 
 env:
