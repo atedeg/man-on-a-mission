@@ -2,7 +2,9 @@ name: Lint commits
 
 on:
   push:
-
+    branches: [main]
+  pull_request:
+    
 jobs:
   lint:
     name: Lint commits
@@ -14,5 +16,9 @@ jobs:
           fetch-depth: 0
       - name: Setup Node toolchain
         uses: ./.github/actions/setup-node
-      - name: Check if commits respect the conventional commit format
+      - name: Check if commits respect the conventional commit format (PR)
+        if: github.event_name == 'pull_request'
+        run: npx commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
+      - name: Check if commits respect the conventional commit format (push)
+        if: github.event_name == 'push'
         run: npx commitlint --from ${{ github.event.before }} --to ${{ github.event.after }} --verbose
