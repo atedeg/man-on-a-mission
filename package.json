@@ -1,6 +1,6 @@
 {
     "devDependencies": {
-        "husky": "9.1.4",
+        "husky": "9.1.5",
         "@commitlint/config-conventional": "19.2.2",
         "@commitlint/cli": "19.4.0",
         "semantic-release": "24.1.0",
