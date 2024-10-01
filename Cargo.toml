@@ -28,4 +28,4 @@ tracing-subscriber = { version = "0.3.18", features = [
     "fmt",
 ] }
 dotenvy = "0.15.7"
-teloxide = { version = "0.12.2", features = ["macros", "throttle"] }
+teloxide = { version = "0.13.0", features = ["macros", "throttle"] }
